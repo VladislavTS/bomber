@@ -63,26 +63,13 @@ switch ( $routeInfo[0] )
 
 		$pageParams = new PageParams();
 
+
+
 		/**
-		 * проверяем, авторизирован ли пользователь
+		 * подключаем контроллер нужной страницы
 		 */
-		if ( !$_SESSION["user_id"] ) {
-
-			/**
-			 * подключаем контроллер страницы авторизации
-			 */
-			if ( !include_once( PATH_PAGE_CONTROLLERS . "/sign.php" ) )
-				$logger_route->error( "Контроллер для страницы sign не найден" );
-
-		} else {
-
-			/**
-			 * подключаем контроллер нужной страницы
-			 */
-			if ( !include_once( PATH_PAGE_CONTROLLERS . "/${handler}.php" ) )
-				$logger_route->error( "Контроллер для страницы ${handler} не найден" );
-
-		}
+		if ( !include_once( PATH_PAGE_CONTROLLERS . "/${handler}.php" ) )
+			$logger_route->error( "Контроллер для страницы ${handler} не найден" );
 
 		break;
 
